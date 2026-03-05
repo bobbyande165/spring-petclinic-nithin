@@ -12,8 +12,8 @@ pipeline{
         }
         stage("build,scan and run"){
             steps{
-                withCredentials([string(credentialsId: 'SONAR', variable: 'SONAR_TOKEN')]){
-                    withSonarQubeEnv('sonar_id'){
+                withCredentials([string(credentialsId: 'sonar_id', variable: 'SONAR_TOKEN')]){
+                    withSonarQubeEnv('SONAR'){
                         sh """mvn package sonar:sonar \
                         -Dsonar.projectKey=bobbyande165_spring-petclinic-own \
                         -Dsonar.organization=bobbyande165 \
