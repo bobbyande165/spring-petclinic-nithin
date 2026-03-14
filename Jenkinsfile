@@ -12,7 +12,7 @@ pipeline{
         }
         stage('build,scan and run'){
             steps{
-                withCredentials([string(credentailsId:'sonar_id',variable:'SONAR_TOKEN')]){
+                withCredentials([string(credentialsId:'sonar_id',variable:'SONAR_TOKEN')]){
                     withSonarQubEnv('SONAR'){
                         sh ''' mvn package sonar:sonar \
                         -Dsonar.projectKey=bobbyande165_spring-petclinic-nithin \
