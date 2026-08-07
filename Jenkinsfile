@@ -17,7 +17,7 @@ pipeline{
                         sh '''
                         mvn clean verify \
                         org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-                        -Dsonar.projectKey=bobbyande165-165 \
+                        -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
                         -Dsonar.host.url=https://sonarcloud.io \
                         -Dsonar.login=$SONAR_TOKEN '''
