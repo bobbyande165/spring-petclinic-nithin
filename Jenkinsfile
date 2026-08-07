@@ -20,7 +20,7 @@ pipeline{
                         -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
                         -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=$SONAR_TOKEN '''
+                        -Dsonar.token=$SONAR_TOKEN '''
                     }
                 }
             }
