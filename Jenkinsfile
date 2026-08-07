@@ -15,7 +15,7 @@ pipeline{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
                     withSonarQubeEnv('sonar'){
                         sh '''
-                        mvn clean verify \
+                        mvn clean package \
                         org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
                         -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
