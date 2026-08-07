@@ -27,10 +27,4 @@ pipeline{
         
         }
     }
-    post{
-        always{
-            archiveArtifacts artifacts: '**/*.jar', fingerprint:true
-            junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true            
-        }
-    }
 }
