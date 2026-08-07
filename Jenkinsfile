@@ -10,10 +10,10 @@ pipeline{
                     branch:'main'
             }
         }
-        stage('build ,scan and run'){
+        stage("build,scan and run"){
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
-                    withSonarQubeEnv('sonar'){
+                    withSonarQubeEnv('SONAR'){
                         sh '''mvn package sonar:sonar \
                         -Dsonar.projectKey=bobbyande165-165 \
                         -Dsonar.organization=bobbyande165 \
@@ -22,6 +22,13 @@ pipeline{
                     }
                 }
             }
+        
+        }
+    }
+    post{
+        always{
+            archiveArtifacts artifacts: '**/*.jar', fingerprint:true
+            junit '**/surefire-reports/*.xml'
         }
     }
 }
