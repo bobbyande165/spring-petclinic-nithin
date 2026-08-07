@@ -13,8 +13,10 @@ pipeline{
         stage("build,scan and run"){
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
-                    withSonarQubeEnv('SONAR'){
-                        sh '''mvn package sonar:sonar \
+                    withSonarQubeEnv('sonar'){
+                        sh '''
+                        mvn clean verify \
+                        org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
                         -Dsonar.projectKey=bobbyande165-165 \
                         -Dsonar.organization=bobbyande165 \
                         -Dsonar.host.url=https://sonarcloud.io \
@@ -28,7 +30,7 @@ pipeline{
     post{
         always{
             archiveArtifacts artifacts: '**/*.jar', fingerprint:true
-            junit '**/surefire-reports/*.xml'
+            junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true            
         }
     }
 }
