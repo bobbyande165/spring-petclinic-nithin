@@ -26,7 +26,7 @@ pipeline{
                 SONAR_AUTH_TOKEN= credentials('SONAR_ID')
             }
             steps{
-                sh 'mvn package sonar:sonar -Dsonar.projectKey=bobbyande165 -Dsonar.organization=bobbyande165 -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN' 
+                sh 'mvn package mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:5.3.1.3519:sonar -Dsonar.projectKey=bobbyande165 -Dsonar.organization=bobbyande165 -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN' 
             }
         }
     }
