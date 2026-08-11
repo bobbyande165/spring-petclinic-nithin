@@ -23,7 +23,7 @@ pipeline{
         stage('Sonarqube Analysis'){
             environment{
                 SONAR_HOST_URL= 'https://sonarcloud.io/'
-                SONAR_AUTH_TOKEN= credentials('sonarqube')
+                SONAR_AUTH_TOKEN= credentials('SONAR_ID')
             }
             steps{
                 sh 'mvn sonar:sonar -Dsonar.projectkey=bobbyande165 -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN' 
