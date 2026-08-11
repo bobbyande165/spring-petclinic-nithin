@@ -24,7 +24,7 @@ pipeline{
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
                     withSonarQubeEnv('SonarQube'){
-                        sh '''mvn package sonar:sonar \
+                        sh '''mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:5.6.0.6792:sonar \
                         -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
                         -Dsonar.host.url=https://sonarcloud.io \
