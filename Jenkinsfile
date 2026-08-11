@@ -20,14 +20,19 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        stage('Sonarqube Analysis'){
-            environment{
-                SONAR_HOST_URL= 'https://sonarcloud.io/'
-                SONAR_AUTH_TOKEN= credentials('SONAR_ID')
-            }
+        stage("build,scan and run"){
             steps{
-                sh 'mvn package org.sonarsource.scanner.maven:sonar-maven-plugin:5.6.0.6792:sonar -Dsonar.projectKey=bobbyande165 -Dsonar.organization=bobbyande165 -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN -e -X' 
+                withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
+                    withSonarQubeEnv('SonarQube'){
+                        sh '''mvn package sonar:sonar \
+                        -Dsonar.projectKey=bobbyande165 \
+                        -Dsonar.organization=bobbyande165 \
+                        -Dsonar.host.url=https://sonarcloud.io \
+                        -Dsonar.login=$SONAR_TOKEN '''
+                    }
+                }
             }
+        
         }
     }
 }
