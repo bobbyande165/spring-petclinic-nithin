@@ -13,7 +13,7 @@ pipeline{
         stage("build,scan and run"){
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
-                    withSonarQubeEnv('sonar'){
+                    withSonarQubeEnv('SonarQube'){
                         sh '''
                         mvn clean package \
                         org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
