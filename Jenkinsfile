@@ -28,15 +28,14 @@ pipeline{
                         -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
                         -Dsonar.host.url=https://sonarcloud.io \
-                        -Dsonar.login=$SONAR_TOKEN 
-                        -e -X '''
+                        -Dsonar.login=$SONAR_TOKEN '''
                     }
                 }
             }
         }
         stage("artifact upload"){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'spring-boot-starter-parent', classifier: '', file: 'target/spring-petclinic-4.0.0-SNAPSHOT.jar', type: '.jar']], credentialsId: 'nexus', groupId: 'org.springframework.boot', nexusUrl: 'http://15.207.115.126:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'spc-repo', version: '4.1.0'
+                nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/spring-petclinic-4.0.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus', groupId: 'org.springframework.boot', nexusUrl: 'http://15.207.115.126:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'spc-repo', version: '4.0.0-SNAPSHOT'
             }
         }
     }
