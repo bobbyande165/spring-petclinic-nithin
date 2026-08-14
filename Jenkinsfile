@@ -40,7 +40,9 @@ pipeline{
         }
         stage("docker image creation"){
             steps{
-                sh
+                script{
+                    sh 'docker build -t spring-petclinic:1.0 .'
+                }
             }
         }
     }
