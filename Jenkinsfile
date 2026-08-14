@@ -38,6 +38,11 @@ pipeline{
                 nexusArtifactUploader artifacts: [[artifactId: 'spring-petclinic', classifier: '', file: 'target/spring-petclinic-4.0.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus', groupId: 'org.springframework.boot', nexusUrl: '13.235.80.79:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'spc-repo', version: '4.0.0-SNAPSHOT'
             }
         }
+        stage("docker image creation"){
+            steps{
+                sh
+            }
+        }
     }
     post{
         always{
