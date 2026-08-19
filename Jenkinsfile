@@ -5,7 +5,7 @@ pipeline{
         maven 'maven'
     }
     triggers {
-        cron('H * * * *')
+        cron('* * * * *')
     }
 
     stages{
@@ -25,15 +25,10 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        stage('compile'){
-            steps{
-                sh 'mvn compile'
-            }
-        }
         stage("build,scan and run"){
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
-                    withSonarQubeEnv('sonarqube'){
+                    withSonarQubeEnv('SonarQube'){
                         sh '''mvn clean package org.sonarsource.scanner.maven:sonar-maven-plugin:5.6.0.6792:sonar \
                         -Dsonar.projectKey=bobbyande165 \
                         -Dsonar.organization=bobbyande165 \
