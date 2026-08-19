@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-        jdk 'JDK17'
+        jdk 'JAVA17'
         maven 'maven'
     }
     triggers {
@@ -25,7 +25,7 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        stage("build,scan and run"){
+        stage("build,scan"){
             steps{
                 withCredentials([string(credentialsId: 'SONAR_ID', variable: 'SONAR_TOKEN')]){
                     withSonarQubeEnv('SonarQube'){
